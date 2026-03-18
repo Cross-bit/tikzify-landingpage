@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="cs">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!--
+      Doplň:
+      - název aplikace v <title> a v hero textu
+      - odkazy: REPO_URL, ORIGINAL_REPO_URL, DOWNLOAD_URL
+    -->
+    <title>Grafový editor pro informatické grafy</title>
+    <meta
+      name="description"
+      content="Jednoduchý grafový editor informatických grafů. Export do TikZ knihovny pro dokumenty a přednášky."
+    />
+
+    <meta property="og:title" content="Grafový editor pro informatické grafy" />
+    <meta
+      property="og:description"
+      content="Editor grafů s exportem do TikZ knihovny. Open source."
+    />
+    <meta property="og:type" content="website" />
+
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+
+  <body>
+    <a class="skip-link" href="#content">Přeskočit na obsah</a>
+
+    <header class="site-header">
+      <div class="container header-inner">
+        <div class="brand">
+          <div class="brand-mark" aria-hidden="true"></div>
+          <div class="brand-text">
+            <div class="brand-title">Grafový editor</div>
+            <div class="brand-subtitle">informatické grafy + export TikZ</div>
+          </div>
+        </div>
+
+        <div class="header-right">
+          <nav class="nav">
+            <a class="nav-link" href="#features">Funkce</a>
+            <a class="nav-link" href="#story">O projektu</a>
+            <a class="nav-link" href="#versions">Verze</a>
+            <a class="nav-link" href="#download">Stažení</a>
+          </nav>
+
+          <button
+            class="btn btn-ghost theme-toggle"
+            id="themeToggle"
+            type="button"
+            aria-pressed="false"
+            aria-label="Přepnout světlý a tmavý režim"
+          >
+            Den
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main id="content">
+      <section class="hero">
+        <div class="container hero-grid">
+          <div class="hero-copy">
+            <h1>Editor, který ti ušetří práci při tvorbě grafů do výukových materiálů.</h1>
+            <p class="lead">
+              Navržený pro informatické grafy. Umí exportovat do TikZ knihovny tak, aby se ti to
+              dalo rovnou použít do LaTeXu.
+            </p>
+
+            <div class="cta-row">
+              <a class="btn btn-primary" href="REPO_URL" target="_blank" rel="noreferrer noopener">
+                Zobrazit repozitář
+              </a>
+              <a class="btn btn-ghost" href="DOWNLOAD_URL" target="_blank" rel="noreferrer noopener">
+                Stáhnout
+              </a>
+            </div>
+
+            <div class="meta-row" aria-label="Podporované platformy">
+              <span class="pill">iOS</span>
+              <span class="pill">Windows</span>
+              <span class="pill">Linux</span>
+              <span class="pill pill-muted">Open source</span>
+            </div>
+          </div>
+
+          <div class="hero-card" role="region" aria-label="Rychlé shrnutí">
+            <div class="hero-card-title">Co dostaneš</div>
+            <ul class="checklist">
+              <li>Vizuální tvorbu a editaci grafů</li>
+              <li>Export do TikZ (knihovna pro LaTeX)</li>
+              <li>Jednoduchý workflow pro dokumenty a prezentace</li>
+            </ul>
+            <div class="hero-card-note">
+              Autor: <strong>Ondřej Kříž</strong>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="features" class="section">
+        <div class="container">
+          <div class="section-head">
+            <h2>Funkce</h2>
+            <p class="muted">Bez přehnaností: jen to, co k tvorbě grafů potřebuješ.</p>
+          </div>
+
+          <div class="cards">
+            <article class="card">
+              <h3>Editor informatických grafů</h3>
+              <p>
+                Tvoř grafy v pohodlném rozhraní a drž se toho, co potřebuješ pro školy i praxi.
+              </p>
+            </article>
+
+            <article class="card">
+              <h3>Export do TikZ knihovny</h3>
+              <p>
+                Vygeneruj TikZ výstup tak, aby šel rovnou použít v LaTeXu.
+              </p>
+            </article>
+
+            <article class="card">
+              <h3>Multiplatformní</h3>
+              <p>
+                Aplikace funguje na iOS, Windows i Linuxu. Spouštíš a exportuješ tam, kde
+                pracuješ.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="story" class="section section-alt">
+        <div class="container">
+          <div class="section-head">
+            <h2>O projektu</h2>
+            <p class="muted">
+              Krátký backstory, aby bylo jasné, odkud se to vzalo.
+            </p>
+          </div>
+
+          <div class="details-wrap">
+            <details>
+              <summary>Story behind (stručně)</summary>
+              <div class="details-body">
+                <p>
+                  Tenhle editor jsem původně dělal jako školní projekt (vysoká/univerzita).
+                  Vzniklo to jako základ, který později přerostl do plné verze s editací grafů.
+                </p>
+                <p>
+                  Odkazy na původní repozitář jsou tady:
+                  <a href="ORIGINAL_REPO_URL" target="_blank" rel="noreferrer noopener"
+                    >původní repo</a
+                  >.
+                </p>
+                <p class="muted">
+                  Pozn.: psáno „ručně“ a postupně rozšiřováno, ne jako jednorázový AI/Cursor
+                  boilerplate. (Ale pokud to chceš vynechat, klidně smaž tenhle odstavec.)
+                </p>
+              </div>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <section id="download" class="section">
+        <div class="container">
+          <div class="download">
+            <div class="download-copy">
+              <h2>Chceš to vyzkoušet?</h2>
+              <p class="muted">
+                Stáhni si verzi pro svou platformu nebo začni rovnou v repozitáři.
+              </p>
+            </div>
+            <div class="download-actions">
+              <a class="btn btn-primary" href="DOWNLOAD_URL" target="_blank" rel="noreferrer noopener">
+                Stažení / Releases
+              </a>
+              <a class="btn btn-ghost" href="REPO_URL" target="_blank" rel="noreferrer noopener">
+                Zdrojový kód
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="versions" class="section section-alt">
+        <div class="container">
+          <div class="section-head">
+            <h2>Verze & platformy</h2>
+            <p class="muted">Aktuální buildy (doplníš čísla verzí za <code>vX.Y.Z</code>).</p>
+          </div>
+
+          <div class="cards">
+            <article class="card">
+              <h3>iOS</h3>
+              <p class="muted">Aktuální verze: <strong>vX.Y.Z</strong></p>
+              <a
+                class="btn btn-ghost"
+                href="DOWNLOAD_URL"
+                target="_blank"
+                rel="noreferrer noopener"
+              >
+                Stáhnout / Releases
+              </a>
+            </article>
+
+            <article class="card">
+              <h3>Windows</h3>
+              <p class="muted">Aktuální verze: <strong>vX.Y.Z</strong></p>
+              <a
+                class="btn btn-ghost"
+                href="DOWNLOAD_URL"
+                target="_blank"
+                rel="noreferrer noopener"
+              >
+                Stáhnout / Releases
+              </a>
+            </article>
+
+            <article class="card">
+              <h3>Linux</h3>
+              <p class="muted">Aktuální verze: <strong>vX.Y.Z</strong></p>
+              <a
+                class="btn btn-ghost"
+                href="DOWNLOAD_URL"
+                target="_blank"
+                rel="noreferrer noopener"
+              >
+                Stáhnout / Releases
+              </a>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <div class="footer-left">
+          <div class="footer-brand">Grafový editor</div>
+          <div class="footer-muted">Open source. Autor: Ondřej Kříž.</div>
+        </div>
+
+        <div class="footer-right">
+          <a class="footer-link" href="REPO_URL" target="_blank" rel="noreferrer noopener">Repo</a>
+          <span class="footer-sep" aria-hidden="true">•</span>
+          <a class="footer-link" href="#content">Nahoru</a>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      (function () {
+        var body = document.body;
+        var btn = document.getElementById("themeToggle");
+        if (!btn) return;
+
+        var key = "theme";
+        var saved = null;
+        try {
+          saved = localStorage.getItem(key);
+        } catch (e) {}
+
+        function apply(theme) {
+          body.setAttribute("data-theme", theme);
+          var isLight = theme === "light";
+          btn.setAttribute("aria-pressed", String(isLight));
+          // Tlačítko ukazuje režim, do kterého přepínáme.
+          btn.textContent = isLight ? "Noc" : "Den";
+        }
+
+        var prefersDark = false;
+        try {
+          prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        } catch (e) {}
+
+        var initial = saved || (prefersDark ? "dark" : "light");
+        apply(initial);
+
+        btn.addEventListener("click", function () {
+          var current = body.getAttribute("data-theme") || "dark";
+          var next = current === "light" ? "dark" : "light";
+          try {
+            localStorage.setItem(key, next);
+          } catch (e) {}
+          apply(next);
+        });
+      })();
+    </script>
+  </body>
+</html>
+
