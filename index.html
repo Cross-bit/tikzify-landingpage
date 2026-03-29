@@ -176,13 +176,23 @@
                   aria-labelledby="demo-tab-editor"
                 >
                   <figure class="editor-preview">
-                    <img
-                      src="./assets/editor_main.png"
-                      alt="Snímek obrazovky tikzgraph s grafem na plátně"
-                      decoding="async"
-                      fetchpriority="high"
-                      data-i18n-alt="hero.previewAlt"
-                    />
+                    <button
+                      type="button"
+                      class="editor-preview__open"
+                      id="editorPreviewOpenBtn"
+                      aria-haspopup="dialog"
+                      aria-expanded="false"
+                      aria-controls="editorPreviewLightbox"
+                      data-i18n-aria="hero.previewZoomAria"
+                    >
+                      <img
+                        src="./assets/editor_main.png"
+                        alt="Snímek obrazovky tikzgraph s grafem na plátně"
+                        decoding="async"
+                        fetchpriority="high"
+                        data-i18n-alt="hero.previewAlt"
+                      />
+                    </button>
                   </figure>
                 </div>
                 <div
@@ -386,6 +396,41 @@
     </footer>
     </div>
 
+    <div
+      id="editorPreviewLightbox"
+      class="editor-lightbox"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="editorLightboxHeading"
+      hidden
+    >
+      <div class="editor-lightbox__backdrop" aria-hidden="true"></div>
+      <div class="editor-lightbox__panel">
+        <div class="editor-lightbox__header">
+          <h2 id="editorLightboxHeading" class="editor-lightbox__title" data-i18n="hero.lightboxHeading">
+            Náhled editoru
+          </h2>
+          <button
+            type="button"
+            class="editor-lightbox__close"
+            data-editor-lightbox-close
+            data-i18n-aria="hero.lightboxCloseAria"
+          >
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="editor-lightbox__frame">
+          <img
+            class="editor-lightbox__img"
+            src="./assets/editor_main.png"
+            alt=""
+            decoding="async"
+            data-i18n-alt="hero.previewAlt"
+          />
+        </div>
+      </div>
+    </div>
+
     <script>
       (function () {
         var body = document.body;
@@ -470,6 +515,60 @@
           tab.addEventListener("click", function () {
             select(tab.getAttribute("data-demo-tab"));
           });
+        });
+      })();
+    </script>
+    <script>
+      (function () {
+        var openBtn = document.getElementById("editorPreviewOpenBtn");
+        var box = document.getElementById("editorPreviewLightbox");
+        if (!openBtn || !box) return;
+
+        var backdrop = box.querySelector(".editor-lightbox__backdrop");
+        var closeBtns = box.querySelectorAll("[data-editor-lightbox-close]");
+        var panel = box.querySelector(".editor-lightbox__panel");
+
+        function open() {
+          box.removeAttribute("hidden");
+          openBtn.setAttribute("aria-expanded", "true");
+          document.body.style.overflow = "hidden";
+          var firstClose = closeBtns.length ? closeBtns[0] : null;
+          if (firstClose) firstClose.focus();
+        }
+
+        function close() {
+          box.setAttribute("hidden", "");
+          openBtn.setAttribute("aria-expanded", "false");
+          document.body.style.overflow = "";
+          openBtn.focus();
+        }
+
+        openBtn.addEventListener("click", function () {
+          open();
+        });
+
+        if (backdrop) {
+          backdrop.addEventListener("click", close);
+        }
+
+        closeBtns.forEach(function (b) {
+          b.addEventListener("click", function (e) {
+            e.stopPropagation();
+            close();
+          });
+        });
+
+        if (panel) {
+          panel.addEventListener("click", function (e) {
+            e.stopPropagation();
+          });
+        }
+
+        document.addEventListener("keydown", function (e) {
+          if (e.key !== "Escape") return;
+          if (box.hasAttribute("hidden")) return;
+          e.preventDefault();
+          close();
         });
       })();
     </script>

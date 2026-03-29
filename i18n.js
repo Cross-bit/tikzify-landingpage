@@ -34,6 +34,9 @@
         demoToolLabel: "N · E · D · V",
         demoTikzTitle: "TikZ výstup",
         previewAlt: "Snímek obrazovky tikzgraph s grafem na plátně",
+        previewZoomAria: "Otevřít větší náhled editoru",
+        lightboxHeading: "Náhled editoru",
+        lightboxCloseAria: "Zavřít",
         badgefoss: "Open source",
       },
       features: {
@@ -109,6 +112,9 @@
         demoToolLabel: "N · E · D · V",
         demoTikzTitle: "TikZ output",
         previewAlt: "Screenshot of tikzgraph with a graph on the canvas",
+        previewZoomAria: "Open larger editor preview",
+        lightboxHeading: "Editor preview",
+        lightboxCloseAria: "Close",
         badgefoss: "Open source",
       },
       features: {
