@@ -1,0 +1,11 @@
+Ikony v této složce
+-------------------
+• apple.svg, windows.svg — vlastní jednoduché SVG (nahraďte dle potřeby).
+• tux.svg — Linux mascot z Wikimedia Commons:
+  https://commons.wikimedia.org/wiki/File:Tux.svg
+  (licence v metadatech souboru; při veřejném webu často uvádějí kredit „Wikimedia Commons“.)
+
+Flaticon: pokud použiješ jejich sady, nahraď odpovídající .svg a dodrž atribuci:
+https://support.flaticon.com/s/article/Attribution-How-when-and-where-FAQ
+
+Starý soubor linux-tux.svg už se nepoužívá (můžeš smazat).

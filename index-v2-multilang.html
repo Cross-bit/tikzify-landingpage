@@ -1,67 +1,21 @@
 <!doctype html>
-<html lang="en">
+<html lang="cs">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <!-- SEO: nahraď https://example.com skutečnou veřejnou URL (canonical, og:url, sitemap). -->
-    <link rel="canonical" href="https://example.com/" />
 
-    <meta name="robots" content="index, follow" />
-    <meta name="theme-color" content="#0b1220" />
-
-    <title>tikzgraph — visual graphs to LaTeX (TikZ) | open source</title>
+    <title>tikzgraph — vizuální grafy do LaTeXu (TikZ)</title>
     <meta
       name="description"
-      content="tikzgraph: draw graphs visually, export clean TikZ code for LaTeX. Nodes, edges, layout—no hand-coding. Open source: Windows, Linux, iOS."
+      content="tikzgraph: vizuální grafy s exportem do TikZ pro LaTeX. Tvorba grafů bez ručního kódování."
     />
 
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://example.com/" />
-    <meta property="og:locale" content="en_US" />
-    <meta property="og:title" content="tikzgraph — visual graphs to LaTeX (TikZ)" />
+    <meta property="og:title" content="tikzgraph — vizuální grafy do LaTeXu (TikZ)" />
     <meta
       property="og:description"
-      content="Draw graphs in a visual editor, export TikZ for LaTeX. Open source, cross-platform."
+      content="Editor grafů s exportem do TikZ pro LaTeX. Open source."
     />
-
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="tikzgraph — visual graphs to LaTeX (TikZ)" />
-    <meta
-      name="twitter:description"
-      content="Draw graphs in a visual editor, export TikZ for LaTeX. Open source, cross-platform."
-    />
-
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@graph": [
-          {
-            "@type": "WebSite",
-            "@id": "https://example.com/#website",
-            "url": "https://example.com/",
-            "name": "tikzgraph",
-            "description": "Visual graph editor with TikZ export for LaTeX documents.",
-            "inLanguage": ["en", "cs"]
-          },
-          {
-            "@type": "SoftwareApplication",
-            "@id": "https://example.com/#app",
-            "name": "tikzgraph",
-            "applicationCategory": "DeveloperApplication",
-            "operatingSystem": "Windows, Linux, iOS",
-            "offers": {
-              "@type": "Offer",
-              "price": "0",
-              "priceCurrency": "USD"
-            },
-            "description": "Visual editor for graph theory workflows: create graphs, adjust layout, export TikZ code for LaTeX and tikzpicture environments.",
-            "license": "https://opensource.org/licenses/MIT",
-            "isAccessibleForFree": true,
-            "url": "https://example.com/"
-          }
-        ]
-      }
-    </script>
+    <meta property="og:type" content="website" />
 
     <link rel="stylesheet" href="./styles.css" />
   </head>
@@ -89,22 +43,11 @@
           <a class="nav-link" href="#story" data-i18n="nav.story">Pozadí</a>
 
           <div class="lang-switch" role="group" data-i18n-aria="langSwitch.aria">
-            <button type="button" class="lang-btn" data-set-lang="en" aria-pressed="true">EN</button>
-            <button type="button" class="lang-btn" data-set-lang="cs" aria-pressed="false">CS</button>
+            <button type="button" class="lang-btn" data-set-lang="cs" aria-pressed="true">CS</button>
+            <button type="button" class="lang-btn" data-set-lang="en" aria-pressed="false">EN</button>
           </div>
 
-          <button class="theme-toggle is-dark" id="themeToggle" type="button" aria-pressed="false">
-            <span class="theme-toggle__icon-wrap" aria-hidden="true">
-              <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-                <circle cx="12" cy="12" r="4" />
-                <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
-              </svg>
-              <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
-              </svg>
-            </span>
-            <span class="theme-toggle__label">Day</span>
-          </button>
+          <button class="theme-toggle" id="themeToggle" type="button" aria-pressed="false">Day</button>
         </nav>
       </div>
     </header>
@@ -116,8 +59,8 @@
             <div class="kicker" data-i18n="hero.kicker">LaTeX workflow · TikZ export</div>
             <h1 data-i18n="hero.h1">Navrhni grafy. Vygeneruj čisté TikZ.</h1>
             <p class="lead" data-i18n="hero.lead">
-              Nakresli graf na plátně, srovnej ho do latě a exportuj do TikZ pro LaTeX — bez ručního přepisování
-              kódu.
+              Vizuální editor pro studenty i vývojáře, kteří pracují s grafovou teorií. Vytvoř graf v
+              rozhraní a exportuj jej do TikZ knihovny pro LaTeX bez ručního přepisování.
             </p>
 
             <div class="cta-row">
@@ -138,62 +81,71 @@
           </div>
 
           <div class="hero-demo" role="region" data-i18n-aria="hero.demoAria">
-            <div class="demo-showcase">
-              <div class="demo-showcase__chrome">
-                <span class="demo-showcase__label" data-i18n="hero.demoPreviewLabel">Náhled</span>
-                <div class="demo-seg" role="tablist" data-i18n-aria="hero.demoTabsAria">
-                  <button
-                    type="button"
-                    class="demo-seg__btn is-active"
-                    role="tab"
-                    id="demo-tab-editor"
-                    aria-selected="true"
-                    aria-controls="demo-panel-editor"
-                    data-demo-tab="editor"
-                    data-i18n="hero.demoEditorTitle"
-                  >
-                    Editor
-                  </button>
-                  <button
-                    type="button"
-                    class="demo-seg__btn"
-                    role="tab"
-                    id="demo-tab-tikz"
-                    aria-selected="false"
-                    aria-controls="demo-panel-tikz"
-                    data-demo-tab="tikz"
-                    data-i18n="hero.demoTikzTitle"
-                  >
-                    TikZ výstup
-                  </button>
+            <div class="demo-grid">
+              <div class="demo-panel">
+                <div class="panel-title" data-i18n="hero.demoEditorTitle">Editor grafů</div>
+
+                <div class="editor-mock" aria-hidden="true">
+                  <div class="editor-toolbar">
+                    <span class="tool-dot" aria-hidden="true"></span>
+                    <span class="tool-label" data-i18n="hero.demoToolLabel">Nodes & edges</span>
+                  </div>
+                  <div class="canvas">
+                    <svg
+                      width="100%"
+                      height="100%"
+                      viewBox="0 0 520 300"
+                      xmlns="http://www.w3.org/2000/svg"
+                      aria-hidden="true"
+                      focusable="false"
+                    >
+                      <defs>
+                        <marker
+                          id="arrow"
+                          markerWidth="10"
+                          markerHeight="10"
+                          refX="9"
+                          refY="3"
+                          orient="auto"
+                        >
+                          <path d="M0,0 L9,3 L0,6 Z" fill="currentColor" />
+                        </marker>
+                      </defs>
+
+                      <!-- nodes -->
+                      <g>
+                        <circle cx="120" cy="190" r="18" fill="var(--surface)" stroke="currentColor" stroke-width="2" />
+                        <circle cx="260" cy="90" r="18" fill="var(--surface)" stroke="currentColor" stroke-width="2" />
+                        <circle cx="400" cy="190" r="18" fill="var(--surface)" stroke="currentColor" stroke-width="2" />
+
+                        <g
+                          font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace"
+                          font-size="14"
+                          fill="currentColor"
+                          text-anchor="middle"
+                          dominant-baseline="middle"
+                        >
+                          <text x="120" y="190">A</text>
+                          <text x="260" y="90">B</text>
+                          <text x="400" y="190">C</text>
+                        </g>
+                      </g>
+
+                      <!-- edges (rendered after nodes so arrowheads stay visible) -->
+                      <g stroke="currentColor" stroke-width="2" fill="none" opacity="0.9">
+                        <line x1="120" y1="190" x2="260" y2="90" marker-end="url(#arrow)" />
+                        <line x1="260" y1="90" x2="400" y2="190" marker-end="url(#arrow)" />
+                        <line x1="120" y1="190" x2="400" y2="190" marker-end="url(#arrow)" />
+                      </g>
+                    </svg>
+                  </div>
                 </div>
               </div>
-              <div class="demo-showcase__body">
-                <div
-                  class="demo-showcase__panel is-active"
-                  id="demo-panel-editor"
-                  role="tabpanel"
-                  aria-labelledby="demo-tab-editor"
-                >
-                  <figure class="editor-preview">
-                    <img
-                      src="./assets/editor_main.png"
-                      alt="Snímek obrazovky tikzgraph s grafem na plátně"
-                      decoding="async"
-                      fetchpriority="high"
-                      data-i18n-alt="hero.previewAlt"
-                    />
-                  </figure>
-                </div>
-                <div
-                  class="demo-showcase__panel"
-                  id="demo-panel-tikz"
-                  role="tabpanel"
-                  aria-labelledby="demo-tab-tikz"
-                  hidden
-                >
-                  <div class="tikz-code">
-                    <pre><code>\begin{tikzpicture}[every node/.style={circle,draw,minimum size=8mm}]
+
+              <div class="demo-panel">
+                <div class="panel-title" data-i18n="hero.demoTikzTitle">TikZ výstup</div>
+                <div class="tikz-code">
+                  <pre><code>\begin{tikzpicture}[every node/.style={circle,draw,minimum size=8mm}]
   \node (A) at (0,0) {A};
   \node (B) at (2,1) {B};
   \node (C) at (4,0) {C};
@@ -202,7 +154,6 @@
   \draw[->] (B) -- (C);
   \draw[->] (A) -- (C);
 \end{tikzpicture}</code></pre>
-                  </div>
                 </div>
               </div>
             </div>
@@ -214,34 +165,25 @@
         <div class="container">
           <div class="section-head">
             <h2 data-i18n="features.title">Funkce</h2>
-            <p data-i18n="features.subtitle">Kresli na plátně, uprav layout a hoď to do LaTeXu jako TikZ.</p>
+            <p data-i18n="features.subtitle">Prakticky: editor + export do TikZ pro LaTeX.</p>
           </div>
 
           <div class="feature-grid">
             <article class="feature">
               <h3 data-i18n="features.f1t">Příjemné kreslení</h3>
-              <p data-i18n="features.f1p">
-                Stavíš graf přímo na plátně — uzly, hrany, popisky. Posouváš plátno a přibližuješ, jak jsi
-                zvyklý z desktopové grafiky.
-              </p>
+              <p data-i18n="features.f1p">Vizuální tvorba grafů: uzly, hrany, základní úpravy a layout.</p>
             </article>
             <article class="feature">
               <h3 data-i18n="features.f2t">TikZ export</h3>
-              <p data-i18n="features.f2p">Za chvíli máš kód připravený do dokumentu — bez ručního přepisování.</p>
+              <p data-i18n="features.f2p">Výstup strukturovaný pro LaTeX — bez ručních úprav kódu.</p>
             </article>
             <article class="feature">
-              <h3 data-i18n="features.f3t">Kontrola nad úpravami</h3>
-              <p data-i18n="features.f3p">
-                Vybíráš víc věcí najednou, přesouváš je společně a když se netrefíš, vrátíš krok zpět nebo
-                znovu vpřed.
-              </p>
+              <h3 data-i18n="features.f3t">LaTeX workflow</h3>
+              <p data-i18n="features.f3p">Výsledný TikZ block jde rovnou vložit do dokumentu nebo šablony.</p>
             </article>
             <article class="feature">
-              <h3 data-i18n="features.f4t">Kdekoliv pracuješ</h3>
-              <p data-i18n="features.f4p">
-                Stejná aplikace na iOS, Windows a Linuxu. Mřížka a vodítka ti pomůžou slícovat layout, když
-                chceš pořádek.
-              </p>
+              <h3 data-i18n="features.f4t">Cross-platform</h3>
+              <p data-i18n="features.f4p">iOS, Windows a Linux. Export tam, kde zrovna píšeš.</p>
             </article>
           </div>
         </div>
@@ -251,7 +193,7 @@
         <div class="container">
           <div class="section-head">
             <h2 data-i18n="how.title">Jak to funguje</h2>
-            <p data-i18n="how.subtitle">Nakresli → srovnej layout → exportuj TikZ.</p>
+            <p data-i18n="how.subtitle">Jednoduchý cyklus: create → adjust → export.</p>
           </div>
 
           <div class="steps">
@@ -260,24 +202,21 @@
                 <div class="step-num">1</div>
                 <h3 data-i18n="how.s1t">Vytvoř graf</h3>
               </div>
-              <p data-i18n="how.s1p">Přidej uzly, spoj je hranami — orientované nebo ne, podle toho, co zrovna řešíš.</p>
+              <p data-i18n="how.s1p">Vyber strukturu, přidej uzly a hrany v editoru.</p>
             </div>
             <div class="step">
               <div class="step-top">
                 <div class="step-num">2</div>
                 <h3 data-i18n="how.s2t">Uprav layout</h3>
               </div>
-              <p data-i18n="how.s2p">
-                Vyber, co potřebuješ, přesuň to na plátně. Zapni mřížku nebo vodítka, až chceš hezky zarovnaný
-                obrázek.
-              </p>
+              <p data-i18n="how.s2p">Nastav pozice a styling tak, aby seděl do dokumentu.</p>
             </div>
             <div class="step">
               <div class="step-top">
                 <div class="step-num">3</div>
                 <h3 data-i18n="how.s3t">Exportuj do TikZ</h3>
               </div>
-              <p data-i18n="how.s3p">Zkopíruj TikZ výstup a vlož ho do svého LaTeX dokumentu.</p>
+              <p data-i18n="how.s3p">Získej čistý TikZ výstup připravený na LaTeX.</p>
             </div>
           </div>
         </div>
@@ -324,46 +263,22 @@
             <aside class="download-card" data-i18n-aria="download.versionsAria">
               <div class="versions">
                 <div class="version-row">
-                  <div class="version-row__label">
-                    <img
-                      class="platform-icon-img"
-                      src="./assets/icons/apple.svg"
-                      width="20"
-                      height="20"
-                      alt=""
-                      decoding="async"
-                    />
+                  <div>
                     <strong>iOS</strong>
                   </div>
-                  <span class="version-row__ver">vX.Y.Z</span>
+                  <span>vX.Y.Z</span>
                 </div>
                 <div class="version-row">
-                  <div class="version-row__label">
-                    <img
-                      class="platform-icon-img"
-                      src="./assets/icons/windows.svg"
-                      width="20"
-                      height="20"
-                      alt=""
-                      decoding="async"
-                    />
+                  <div>
                     <strong>Windows</strong>
                   </div>
-                  <span class="version-row__ver">vX.Y.Z</span>
+                  <span>vX.Y.Z</span>
                 </div>
                 <div class="version-row">
-                  <div class="version-row__label">
-                    <img
-                      class="platform-icon-img platform-icon-img--tux"
-                      src="./assets/icons/tux.svg"
-                      width="22"
-                      height="22"
-                      alt=""
-                      decoding="async"
-                    />
+                  <div>
                     <strong>Linux</strong>
                   </div>
-                  <span class="version-row__ver">vX.Y.Z</span>
+                  <span>vX.Y.Z</span>
                 </div>
                 <div class="versions-note" data-i18n="download.versionsNote">
                   Pro konkrétní balíčky mrkni na Releases.
@@ -398,20 +313,12 @@
           saved = localStorage.getItem(key);
         } catch (e) {}
 
-        function setThemeButtonFallback(isLight) {
-          var label = btn.querySelector(".theme-toggle__label");
-          if (label) label.textContent = isLight ? "Night" : "Day";
-          else btn.textContent = isLight ? "Night" : "Day";
-          btn.classList.toggle("is-light", isLight);
-          btn.classList.toggle("is-dark", !isLight);
-        }
-
         function apply(theme) {
           body.setAttribute("data-theme", theme);
           var isLight = theme === "light";
           btn.setAttribute("aria-pressed", String(isLight));
           if (window.I18N && window.I18N.syncThemeToggle) window.I18N.syncThemeToggle(btn);
-          else setThemeButtonFallback(isLight);
+          else btn.textContent = isLight ? "Night" : "Day";
           try {
             body.dispatchEvent(new Event("themechange"));
           } catch (e) {}
@@ -436,43 +343,6 @@
       })();
     </script>
     <script src="./i18n.js"></script>
-    <script>
-      (function () {
-        var root = document.querySelector(".demo-showcase");
-        if (!root) return;
-        var tabs = root.querySelectorAll("[data-demo-tab]");
-        var panels = {
-          editor: document.getElementById("demo-panel-editor"),
-          tikz: document.getElementById("demo-panel-tikz"),
-        };
-
-        function select(which) {
-          tabs.forEach(function (tab) {
-            var on = tab.getAttribute("data-demo-tab") === which;
-            tab.setAttribute("aria-selected", on ? "true" : "false");
-            tab.classList.toggle("is-active", on);
-          });
-          if (panels.editor) {
-            var ed = which === "editor";
-            panels.editor.classList.toggle("is-active", ed);
-            if (ed) panels.editor.removeAttribute("hidden");
-            else panels.editor.setAttribute("hidden", "");
-          }
-          if (panels.tikz) {
-            var tz = which === "tikz";
-            panels.tikz.classList.toggle("is-active", tz);
-            if (tz) panels.tikz.removeAttribute("hidden");
-            else panels.tikz.setAttribute("hidden", "");
-          }
-        }
-
-        tabs.forEach(function (tab) {
-          tab.addEventListener("click", function () {
-            select(tab.getAttribute("data-demo-tab"));
-          });
-        });
-      })();
-    </script>
     <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
     <script>
       (function () {

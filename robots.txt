@@ -1,0 +1,5 @@
+# Nahraď example.com svou doménou (stejně jako v index.html canonical).
+User-agent: *
+Allow: /
+
+Sitemap: https://example.com/sitemap.xml
