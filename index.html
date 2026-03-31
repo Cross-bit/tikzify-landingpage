@@ -63,7 +63,8 @@
       }
     </script>
 
-    <link rel="stylesheet" href="./styles.css" />
+    <!-- ?v= bumpni při změně CSS, až GitHub Pages / CDN drží starou verzi v cache. -->
+    <link rel="stylesheet" href="./styles.css?v=2" />
   </head>
 
   <body>
@@ -121,12 +122,17 @@
             </p>
 
             <div class="cta-row">
-              <a class="btn btn-primary" href="DOWNLOAD_URL" target="_blank" rel="noreferrer noopener" data-i18n="hero.download"
+              <a class="btn btn-primary" href="#platform-downloads" data-i18n="hero.download"
                 >Stáhnout</a
               >
               <a class="btn btn-secondary" href="https://github.com/Cross-bit/simple-graph-editor" target="_blank" rel="noreferrer noopener"
                 >GitHub</a
               >
+            </div>
+
+            <div class="hero-release">
+              <span class="hero-release__label" data-i18n="hero.currentReleaseLabel">Current release</span>
+              <strong class="hero-release__value">vX.Y.Z</strong>
             </div>
 
             <div class="meta-row" data-i18n-aria="hero.platformsAria">
@@ -296,90 +302,119 @@
       <section id="download" class="download">
         <div class="container">
           <div class="download-grid">
-            <div class="download-card">
-              <h2 data-i18n="download.title">Stažení</h2>
-              <p data-i18n="download.lead">
-                Začni rovnou v Releases, nebo otevři repozitář a podívej se, co je uvnitř.
-              </p>
+            <div class="download-card download-card--combined">
+              <div class="download-combined">
+                <div class="download-main">
+                  <h2 data-i18n="download.title">Stažení</h2>
+                  <p data-i18n="download.lead">
+                    Začni rovnou v Releases, nebo otevři repozitář a podívej se, co je uvnitř.
+                  </p>
 
-              <div class="download-actions">
-                <a class="btn btn-primary" href="DOWNLOAD_URL" target="_blank" rel="noreferrer noopener" data-i18n="download.releases"
-                  >Releases / Download</a
-                >
-                <a class="btn btn-secondary" href="REPO_URL" target="_blank" rel="noreferrer noopener" data-i18n="download.source"
-                  >Zdrojový kód</a
-                >
+                  <div class="download-actions">
+                    <a class="btn btn-primary" href="DOWNLOAD_URL" target="_blank" rel="noreferrer noopener" data-i18n="download.releases"
+                      >Releases / Download</a
+                    >
+                    <a class="btn btn-secondary" href="REPO_URL" target="_blank" rel="noreferrer noopener" data-i18n="download.source"
+                      >Zdrojový kód</a
+                    >
+                  </div>
+
+                  <section id="story" class="story" data-i18n-aria="download.storyAria">
+                    <details>
+                      <summary data-i18n="download.storySummary">Story behind (stručně)</summary>
+                      <p data-i18n="download.storyP1">
+                        Tenhle editor jsem původně dělal jako školní projekt. Vznikl jako základ, který
+                        postupně přerostl do plné verze s editací grafů a exportem do TikZ.
+                      </p>
+                      <p>
+                        <span data-i18n="download.storyRepoLead"></span>
+                        <a href="https://github.com/Cross-bit/simple-graph-editor" target="_blank" rel="noreferrer noopener" data-i18n="download.storyRepoLink"
+                          >původní repo</a
+                        >.
+                      </p>
+                      <p data-i18n="download.storyAuthor" data-i18n-html="true">
+                        Autor: <strong>Ondřej Kříž</strong>. Aplikace je open source.
+                      </p>
+                    </details>
+                  </section>
+                </div>
+
+                <aside id="platform-downloads" class="download-side" data-i18n-aria="download.versionsAria">
+                  <div class="versions">
+                    <div class="release-current">
+                      <span class="release-current__label" data-i18n="download.currentReleaseLabel">Aktuální release</span>
+                      <strong class="release-current__value">vX.Y.Z</strong>
+                    </div>
+                    <div class="version-row">
+                      <div class="version-row__label">
+                        <img
+                          class="platform-icon-img"
+                          src="./assets/icons/apple.svg"
+                          width="20"
+                          height="20"
+                          alt=""
+                          decoding="async"
+                        />
+                        <strong>iOS</strong>
+                      </div>
+                      <a
+                        class="version-row__ver"
+                        href="IOS_DOWNLOAD_URL"
+                        target="_blank"
+                        rel="noreferrer noopener"
+                        data-i18n="download.platformDownload"
+                        >Stáhnout</a
+                      >
+                    </div>
+                    <div class="version-row">
+                      <div class="version-row__label">
+                        <img
+                          class="platform-icon-img"
+                          src="./assets/icons/windows.svg"
+                          width="20"
+                          height="20"
+                          alt=""
+                          decoding="async"
+                        />
+                        <strong>Windows</strong>
+                      </div>
+                      <a
+                        class="version-row__ver"
+                        href="WINDOWS_DOWNLOAD_URL"
+                        target="_blank"
+                        rel="noreferrer noopener"
+                        data-i18n="download.platformDownload"
+                        >Stáhnout</a
+                      >
+                    </div>
+                    <div class="version-row">
+                      <div class="version-row__label">
+                        <img
+                          class="platform-icon-img platform-icon-img--tux"
+                          src="./assets/icons/tux.svg"
+                          width="22"
+                          height="22"
+                          alt=""
+                          decoding="async"
+                        />
+                        <strong>Linux</strong>
+                      </div>
+                      <a
+                        class="version-row__ver"
+                        href="LINUX_DOWNLOAD_URL"
+                        target="_blank"
+                        rel="noreferrer noopener"
+                        data-i18n="download.platformDownload"
+                        >Stáhnout</a
+                      >
+                    </div>
+                    <div class="versions-note" data-i18n="download.versionsNote">
+                      Pro konkrétní balíčky mrkni na Releases.
+                    </div>
+                  </div>
+                </aside>
               </div>
-
-              <section id="story" class="story" data-i18n-aria="download.storyAria">
-                <details>
-                  <summary data-i18n="download.storySummary">Story behind (stručně)</summary>
-                  <p data-i18n="download.storyP1">
-                    Tenhle editor jsem původně dělal jako školní projekt. Vznikl jako základ, který
-                    postupně přerostl do plné verze s editací grafů a exportem do TikZ.
-                  </p>
-                  <p>
-                    <span data-i18n="download.storyRepoLead"></span>
-                    <a href="ORIGINAL_REPO_URL" target="_blank" rel="noreferrer noopener" data-i18n="download.storyRepoLink"
-                      >původní repo</a
-                    >.
-                  </p>
-                  <p data-i18n="download.storyAuthor" data-i18n-html="true">
-                    Autor: <strong>Ondřej Kříž</strong>. Aplikace je open source.
-                  </p>
-                </details>
-              </section>
             </div>
-
-            <aside class="download-card" data-i18n-aria="download.versionsAria">
-              <div class="versions">
-                <div class="version-row">
-                  <div class="version-row__label">
-                    <img
-                      class="platform-icon-img"
-                      src="./assets/icons/apple.svg"
-                      width="20"
-                      height="20"
-                      alt=""
-                      decoding="async"
-                    />
-                    <strong>iOS</strong>
-                  </div>
-                  <span class="version-row__ver">vX.Y.Z</span>
-                </div>
-                <div class="version-row">
-                  <div class="version-row__label">
-                    <img
-                      class="platform-icon-img"
-                      src="./assets/icons/windows.svg"
-                      width="20"
-                      height="20"
-                      alt=""
-                      decoding="async"
-                    />
-                    <strong>Windows</strong>
-                  </div>
-                  <span class="version-row__ver">vX.Y.Z</span>
-                </div>
-                <div class="version-row">
-                  <div class="version-row__label">
-                    <img
-                      class="platform-icon-img platform-icon-img--tux"
-                      src="./assets/icons/tux.svg"
-                      width="22"
-                      height="22"
-                      alt=""
-                      decoding="async"
-                    />
-                    <strong>Linux</strong>
-                  </div>
-                  <span class="version-row__ver">vX.Y.Z</span>
-                </div>
-                <div class="versions-note" data-i18n="download.versionsNote">
-                  Pro konkrétní balíčky mrkni na Releases.
-                </div>
-              </div>
-            </aside>
           </div>
         </div>
       </section>
@@ -480,7 +515,8 @@
         });
       })();
     </script>
-    <script src="./i18n.js"></script>
+    <!-- ?v= bumpni při změně překladů (stejný důvod jako u CSS). -->
+    <script src="./i18n.js?v=2"></script>
     <script>
       (function () {
         var root = document.querySelector(".demo-showcase");
@@ -840,6 +876,35 @@
 
         document.body.addEventListener("themechange", function () {
           drawOnce();
+        });
+
+        /* Během scrollu vypnout fyziku — jinak tick + kreslení bere hlavní vlákno a scroll seká. */
+        if (!reduceMotion && simulation) {
+          var scrollEndTimer = null;
+          var wasRunning = false;
+          window.addEventListener(
+            "scroll",
+            function () {
+              if (!simulation) return;
+              if (scrollEndTimer == null) {
+                wasRunning = simulation.alpha() > simulation.alphaMin();
+                simulation.stop();
+              }
+              clearTimeout(scrollEndTimer);
+              scrollEndTimer = setTimeout(function () {
+                scrollEndTimer = null;
+                drawOnce();
+                if (wasRunning) simulation.alpha(0.12).restart();
+              }, 140);
+            },
+            { passive: true }
+          );
+        }
+
+        document.addEventListener("visibilitychange", function () {
+          if (!simulation || reduceMotion) return;
+          if (document.hidden) simulation.stop();
+          else simulation.alpha(0.1).restart();
         });
       })();
     </script>

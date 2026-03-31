@@ -26,6 +26,7 @@
         lead:
           "Nakresli graf na plátně, srovnej ho do latě a exportuj do TikZ pro LaTeX — bez ručního přepisování kódu.",
         download: "Stáhnout",
+        currentReleaseLabel: "Aktuální release",
         platformsAria: "Podporované platformy",
         demoAria: "Ukázka editoru a TikZ výstupu",
         demoPreviewLabel: "Náhled",
@@ -78,6 +79,8 @@
         storyRepoLink: "původní repo",
         storyAuthor: "Autor: <strong>Ondřej Kříž</strong>. Aplikace je open source.",
         versionsAria: "Aktuální verze",
+        currentReleaseLabel: "Aktuální release",
+        platformDownload: "Stáhnout",
         versionsNote: "Pro konkrétní balíčky mrkni na Releases.",
       },
       footer: {
@@ -104,6 +107,7 @@
         lead:
           "Draw on the canvas, tidy the layout, and export to TikZ for LaTeX—no retyping code by hand.",
         download: "Download",
+        currentReleaseLabel: "Current release",
         platformsAria: "Supported platforms",
         demoAria: "Editor and TikZ output preview",
         demoPreviewLabel: "Preview",
@@ -156,6 +160,8 @@
         storyRepoLink: "original repo",
         storyAuthor: "Author: <strong>Ondřej Kříž</strong>. The app is open source.",
         versionsAria: "Current version",
+        currentReleaseLabel: "Current release",
+        platformDownload: "Download",
         versionsNote: "See Releases for specific packages.",
       },
       footer: {

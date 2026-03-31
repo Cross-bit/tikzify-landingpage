@@ -369,7 +369,33 @@ a {
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+
+.hero-release {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   margin-bottom: 12px;
+  padding: 6px 9px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--panel);
+  box-shadow: inset 0 0 0 1px rgba(37, 99, 235, 0.18);
+}
+
+.hero-release__label {
+  font-size: 11px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+}
+
+.hero-release__value {
+  font-size: 13px;
+  color: var(--text);
+  font-family: ui-monospace, Menlo, Consolas, monospace;
 }
 
 .btn {
@@ -875,8 +901,27 @@ a {
 
 .download-grid {
   display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
+  grid-template-columns: 1fr;
   gap: 10px;
+}
+
+.download-card--combined {
+  padding: 0;
+  overflow: hidden;
+}
+
+.download-combined {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+}
+
+.download-main {
+  padding: 14px;
+}
+
+.download-side {
+  padding: 14px;
+  border-left: 1px solid var(--border-2);
 }
 
 .download-card {
@@ -908,6 +953,33 @@ a {
   display: grid;
   gap: 8px;
 }
+
+.release-current {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--panel);
+  box-shadow: inset 0 0 0 1px rgba(37, 99, 235, 0.18);
+}
+
+.release-current__label {
+  font-size: 12px;
+  color: var(--muted);
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.release-current__value {
+  font-size: 14px;
+  color: var(--text);
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+}
+
 .version-row {
   display: flex;
   align-items: center;
@@ -954,6 +1026,22 @@ a {
   font-size: 13px;
   font-family: ui-monospace, Menlo, Consolas, monospace;
   flex-shrink: 0;
+  text-decoration: none;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 5px 9px;
+  background: var(--panel);
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.version-row__ver:hover {
+  color: var(--text);
+  background: var(--panel-2);
+}
+
+.version-row__ver:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
 }
 
 .versions-note {
@@ -1046,6 +1134,15 @@ a {
 
   .download-grid {
     grid-template-columns: 1fr;
+  }
+
+  .download-combined {
+    grid-template-columns: 1fr;
+  }
+
+  .download-side {
+    border-left: none;
+    border-top: 1px solid var(--border-2);
   }
 
   .steps {
