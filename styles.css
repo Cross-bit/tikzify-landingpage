@@ -153,6 +153,31 @@ a {
   background: var(--header-bg);
 }
 
+.wip-banner {
+  border-bottom: 1px solid var(--border-2);
+  background: #fef3c7;
+}
+
+[data-theme="dark"] .wip-banner {
+  background: #3a2a00;
+}
+
+.wip-banner .container {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.wip-banner p {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 700;
+  color: #7c2d12;
+}
+
+[data-theme="dark"] .wip-banner p {
+  color: #fcd34d;
+}
+
 .header-inner {
   padding: 12px 0;
   display: flex;

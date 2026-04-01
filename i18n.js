@@ -18,6 +18,9 @@
       theme: { toDay: "Den", toNight: "Noc", ariaToggle: "Přepnout světlý a tmavý režim" },
       langSwitch: { aria: "Jazyk stránky" },
       skip: "Přeskočit na obsah",
+      notice: {
+        wip: "Work in progress: TikZ export zatím není hotový a download odkazy nemusí vždy fungovat.",
+      },
       brand: { aria: "tikzgraph", title: "tikzgraph", subtitle: "vizuální grafy · TikZ do LaTeXu" },
       nav: { mainAria: "Hlavní navigace", features: "Funkce", how: "Jak to funguje", download: "Stažení", story: "Pozadí" },
       hero: {
@@ -99,6 +102,9 @@
       theme: { toDay: "Day", toNight: "Night", ariaToggle: "Toggle light and dark theme" },
       langSwitch: { aria: "Page language" },
       skip: "Skip to content",
+      notice: {
+        wip: "Work in progress: TikZ export is not finished yet, and download links may not always work.",
+      },
       brand: { aria: "tikzgraph", title: "tikzgraph", subtitle: "Visual graphs · TikZ for LaTeX" },
       nav: { mainAria: "Main navigation", features: "Features", how: "How it works", download: "Download", story: "Background" },
       hero: {
