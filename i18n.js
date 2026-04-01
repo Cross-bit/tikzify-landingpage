@@ -20,6 +20,7 @@
       skip: "Přeskočit na obsah",
       notice: {
         wip: "Work in progress: TikZ export zatím není hotový a download odkazy nemusí vždy fungovat.",
+        contactLead: "Pokud máte zájem o vývoj nebo máte nápady na zlepšení, napište mi na",
       },
       brand: { aria: "tikzgraph", title: "tikzgraph", subtitle: "vizuální grafy · TikZ do LaTeXu" },
       nav: { mainAria: "Hlavní navigace", features: "Funkce", how: "Jak to funguje", download: "Stažení", story: "Pozadí" },
@@ -104,6 +105,7 @@
       skip: "Skip to content",
       notice: {
         wip: "Work in progress: TikZ export is not finished yet, and download links may not always work.",
+        contactLead: "If you are interested in development or have ideas to improve the app, email me at",
       },
       brand: { aria: "tikzgraph", title: "tikzgraph", subtitle: "Visual graphs · TikZ for LaTeX" },
       nav: { mainAria: "Main navigation", features: "Features", how: "How it works", download: "Download", story: "Background" },
