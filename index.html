@@ -64,7 +64,7 @@
     </script>
 
     <!-- ?v= bumpni při změně CSS, až GitHub Pages / CDN drží starou verzi v cache. -->
-    <link rel="stylesheet" href="./styles.css?v=2" />
+    <link rel="stylesheet" href="./styles.css?v=5" />
   </head>
 
   <body>
@@ -106,6 +106,29 @@
             </span>
             <span class="theme-toggle__label">Day</span>
           </button>
+
+          <div
+            class="bg-graph-mode"
+            id="bgGraphMode"
+            role="group"
+            data-i18n-aria="bgGraphMode.aria"
+          >
+            <button type="button" class="bg-graph-mode__btn" data-bg-graph-mode="auto" data-i18n="bgGraphMode.auto" aria-pressed="true">
+              Auto
+            </button>
+            <button type="button" class="bg-graph-mode__btn" data-bg-graph-mode="normal" data-i18n="bgGraphMode.normal" aria-pressed="false">
+              Normál
+            </button>
+            <button type="button" class="bg-graph-mode__btn" data-bg-graph-mode="easter" data-i18n="bgGraphMode.easter" aria-pressed="false">
+              Vejce
+            </button>
+            <button type="button" class="bg-graph-mode__btn" data-bg-graph-mode="valentine" data-i18n="bgGraphMode.valentine" aria-pressed="false">
+              ♥
+            </button>
+            <button type="button" class="bg-graph-mode__btn" data-bg-graph-mode="christmas" data-i18n="bgGraphMode.xmas" aria-pressed="false">
+              ★
+            </button>
+          </div>
         </nav>
       </div>
     </header>
@@ -542,7 +565,7 @@
       })();
     </script>
     <!-- ?v= bumpni při změně překladů (stejný důvod jako u CSS). -->
-    <script src="./i18n.js?v=2"></script>
+    <script src="./i18n.js?v=3"></script>
     <script>
       (function () {
         var apiUrl = "https://api.github.com/repos/Cross-bit/tikzify/releases/latest";
@@ -886,8 +909,8 @@
             )
             .force("bounds", forceBounds())
             .velocityDecay(0.39)
-            .alphaDecay(0.014)
-            .alphaMin(0.001);
+            .alphaDecay(0.012)
+            .alphaMin(0.0009);
 
           if (reduceMotion) {
             simulation.stop();
@@ -899,14 +922,561 @@
 
           simulation.on("tick", drawOnce);
 
+          var simRef = simulation;
+          simulation.on("end", function () {
+            if (reduceMotion || document.hidden) return;
+            if (simulation !== simRef) return;
+            simulation.alpha(0.028).restart();
+          });
+
           simulation.alpha(1).restart();
         }
 
+        /** Velikonoční neděle (západní výpočet) v lokálním kalendáři. */
+        function easterSunday(year) {
+          var a = year % 19;
+          var b = Math.floor(year / 100);
+          var c = year % 100;
+          var d = Math.floor(b / 4);
+          var e = b % 4;
+          var f = Math.floor((b + 8) / 25);
+          var g = Math.floor((b - f + 1) / 3);
+          var h = (19 * a + b - d - g + 15) % 30;
+          var i = Math.floor(c / 4);
+          var k = c % 4;
+          var l = (32 + 2 * e + 2 * i - h - k) % 7;
+          var m = Math.floor((a + 11 * h + 22 * l) / 451);
+          var month = Math.floor((h + l - 7 * m + 114) / 31);
+          var day = ((h + l - 7 * m + 114) % 31) + 1;
+          return new Date(year, month - 1, day);
+        }
+
+        var easterSeasonCache = { key: null, on: false };
+
+        /** Od Velkého pátku do velikonočního pondělí (včetně). */
+        function isEasterSeason() {
+          var now = new Date();
+          var dk = now.getFullYear() + "-" + now.getMonth() + "-" + now.getDate();
+          if (easterSeasonCache.key === dk) return easterSeasonCache.on;
+          var sun = easterSunday(now.getFullYear());
+          var start = new Date(sun.getFullYear(), sun.getMonth(), sun.getDate() - 2);
+          var end = new Date(sun.getFullYear(), sun.getMonth(), sun.getDate() + 1);
+          var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+          easterSeasonCache.key = dk;
+          easterSeasonCache.on = today >= start && today <= end;
+          return easterSeasonCache.on;
+        }
+
+        var holidayDateCache = { key: null, valentine: false, christmasStar: false };
+
+        function refreshHolidayDateFlags() {
+          var now = new Date();
+          var dk = now.getFullYear() + "-" + now.getMonth() + "-" + now.getDate();
+          if (holidayDateCache.key === dk) return;
+          holidayDateCache.key = dk;
+          holidayDateCache.valentine = now.getMonth() === 1 && now.getDate() === 14;
+          holidayDateCache.christmasStar = now.getMonth() === 11 && now.getDate() === 24;
+        }
+
+        function isValentineSeason() {
+          refreshHolidayDateFlags();
+          return holidayDateCache.valentine;
+        }
+
+        function isChristmasStarDay() {
+          refreshHolidayDateFlags();
+          return holidayDateCache.christmasStar;
+        }
+
+        /**
+         * Srdce z uživatelského SVG (viewBox 0 0 100 100), střed (50,50) = uzel.
+         * rHeart řídí velikost (~výška tvaru v jednotkách uzlu).
+         */
+        function valentineHeartPath(cx, cy, rHeart) {
+          var unit = (rHeart * 2.2) / 76;
+          function px(x) {
+            return cx + (x - 50) * unit;
+          }
+          function py(y) {
+            return cy + (y - 50) * unit;
+          }
+          ctx.beginPath();
+          ctx.moveTo(px(50), py(88));
+          ctx.lineTo(px(15), py(55));
+          ctx.bezierCurveTo(px(5), py(45), px(5), py(25), px(20), py(18));
+          ctx.bezierCurveTo(px(32), py(12), px(43), py(18), px(50), py(28));
+          ctx.bezierCurveTo(px(57), py(18), px(68), py(12), px(80), py(18));
+          ctx.bezierCurveTo(px(95), py(25), px(95), py(45), px(85), py(55));
+          ctx.closePath();
+        }
+
+        function valentineHeartScale(d) {
+          var u = (d.id * 1103515245 + 12345 + ((d.r * 1000) | 0)) >>> 0;
+          var spread = 0.88 + (u % 1000) / 1000 * 0.34;
+          return d.r * 1.18 * spread;
+        }
+
+        var VALENTINE_FILL = "#ff0000";
+        var VALENTINE_STROKE_LIGHT = "#7a0000";
+        var VALENTINE_STROKE_DARK = "#ff2b2b";
+
+        function christmasStarPath(cx, cy, outer, inner) {
+          var pts = 5;
+          var rot = -Math.PI / 2;
+          var step = Math.PI / pts;
+          var i;
+          ctx.beginPath();
+          for (i = 0; i < 2 * pts; i++) {
+            var rad = i % 2 === 0 ? outer : inner;
+            var a = rot + i * step;
+            var px = cx + Math.cos(a) * rad;
+            var py = cy + Math.sin(a) * rad;
+            if (i === 0) ctx.moveTo(px, py);
+            else ctx.lineTo(px, py);
+          }
+          ctx.closePath();
+        }
+
+        var BG_GRAPH_MODE_STORAGE = "tikzgraph-bg-graph-mode";
+
+        function getBgGraphModeOverride() {
+          try {
+            var v = localStorage.getItem(BG_GRAPH_MODE_STORAGE);
+            if (v === "normal" || v === "easter" || v === "valentine" || v === "christmas") return v;
+          } catch (e) {}
+          return null;
+        }
+
+        function setBgGraphModeOverride(mode) {
+          try {
+            if (!mode || mode === "auto") localStorage.removeItem(BG_GRAPH_MODE_STORAGE);
+            else localStorage.setItem(BG_GRAPH_MODE_STORAGE, mode);
+          } catch (e) {}
+          syncBgGraphModeButtons();
+          drawOnce();
+          if (simulation && !reduceMotion && !document.hidden) {
+            simulation.alpha(0.09).restart();
+          }
+        }
+
+        function effectiveBgGraphTheme() {
+          var o = getBgGraphModeOverride();
+          if (o) return o;
+          if (isEasterSeason()) return "easter";
+          if (isValentineSeason()) return "valentine";
+          if (isChristmasStarDay()) return "christmas";
+          return "normal";
+        }
+
+        function syncBgGraphModeButtons() {
+          var cur = getBgGraphModeOverride() || "auto";
+          var root = document.getElementById("bgGraphMode");
+          if (!root) return;
+          root.querySelectorAll("[data-bg-graph-mode]").forEach(function (btn) {
+            var m = btn.getAttribute("data-bg-graph-mode");
+            var on = m === cur;
+            btn.setAttribute("aria-pressed", on ? "true" : "false");
+            btn.classList.toggle("is-active", on);
+          });
+        }
+
+        /** Jen velikonoce: větší vejce + variace (simulace dál používá d.r). */
+        function easterEggDrawRadius(d) {
+          var u = (d.id * 1103515245 + 12345 + ((d.r * 1000) | 0)) >>> 0;
+          u = (u ^ (u >>> 13)) >>> 0;
+          var spread = 0.84 + (u % 1000) / 1000 * 0.32;
+          return d.r * 1.24 * spread;
+        }
+
+        function easterParseHex6(s) {
+          var m = /^#?([\da-f]{2})([\da-f]{2})([\da-f]{2})$/i.exec((s || "").trim());
+          if (!m) return { r: 210, g: 200, b: 220 };
+          return { r: parseInt(m[1], 16), g: parseInt(m[2], 16), b: parseInt(m[3], 16) };
+        }
+
+        function easterRgbToHex(r, g, b) {
+          function c(x) {
+            x = Math.max(0, Math.min(255, x | 0));
+            return (x < 16 ? "0" : "") + x.toString(16);
+          }
+          return "#" + c(r) + c(g) + c(b);
+        }
+
+        /** Zvýrazní odstín oproti šedé = působí „svítivěji“ (bez bílého overlay). */
+        function easterBoostVivid(r, g, b, factor) {
+          var lum = 0.299 * r + 0.587 * g + 0.114 * b;
+          function push(c) {
+            return Math.max(0, Math.min(255, lum + (c - lum) * factor));
+          }
+          return { r: push(r), g: push(g), b: push(b) };
+        }
+
+        function easterLiftGamma(r, g, b, gamma) {
+          function lift(x) {
+            x = x / 255;
+            x = Math.pow(x, gamma);
+            return Math.max(0, Math.min(255, x * 255));
+          }
+          return { r: lift(r), g: lift(g), b: lift(b) };
+        }
+
+        /** Posune barvu k bílé — veselejší „bonbón“, ne šedivý wash. */
+        function easterHappyLighten(r, g, b, amt) {
+          function L(c) {
+            return Math.max(0, Math.min(255, c + (255 - c) * amt));
+          }
+          return { r: L(r), g: L(g), b: L(b) };
+        }
+
+        /** Červená bez růžova: přitlačí G/B, R nechá na doraz (žádné míchání k bílé). */
+        function easterRedSnap(r, g, b) {
+          if (!(r > g + 20 && r > b + 20 && r > 95)) {
+            return { r: r, g: g, b: b };
+          }
+          return {
+            r: Math.min(255, r + 6),
+            g: Math.max(0, (g * 0.78) | 0),
+            b: Math.max(0, (b * 0.78) | 0),
+          };
+        }
+
+        /** Cukrářství — co nejvíc sytých odstínů, žádná šedá. */
+        var easterAccentRgb = [
+          { r: 255, g: 80, b: 180 },
+          { r: 255, g: 140, b: 40 },
+          { r: 255, g: 255, b: 60 },
+          { r: 40, g: 255, b: 130 },
+          { r: 0, g: 250, b: 255 },
+          { r: 160, g: 80, b: 255 },
+          { r: 255, g: 60, b: 255 },
+          { r: 255, g: 70, b: 200 },
+          { r: 255, g: 130, b: 100 },
+          { r: 0, g: 255, b: 255 },
+          { r: 255, g: 50, b: 130 },
+          { r: 200, g: 255, b: 50 },
+          { r: 255, g: 200, b: 60 },
+          { r: 0, g: 200, b: 255 },
+          { r: 255, g: 0, b: 120 },
+          { r: 120, g: 255, b: 0 },
+          { r: 255, g: 180, b: 0 },
+          { r: 50, g: 180, b: 255 },
+          { r: 255, g: 100, b: 255 },
+          { r: 0, g: 255, b: 160 },
+        ];
+
+        function easterEggFillHex(d) {
+          var base = easterParseHex6(d.color);
+          var i = ((d.id * 7919) ^ (d.id << 7) ^ ((d.r * 100) | 0)) >>> 0;
+          var p = easterAccentRgb[i % easterAccentRgb.length];
+          var t = 0.42;
+          var mr = base.r * (1 - t) + p.r * t;
+          var mg = base.g * (1 - t) + p.g * t;
+          var mb = base.b * (1 - t) + p.b * t;
+          var blueLean = mb >= mr + 18 && mb >= mg - 12;
+          /* Červená před žlutou — jinak oranžová směs spadne do yellow a vybledne. */
+          var redLean =
+            !blueLean &&
+            mr > 130 &&
+            mr >= mg + 20 &&
+            mr >= mb + 20;
+          var yellowLean =
+            !blueLean &&
+            !redLean &&
+            mr > 155 &&
+            mg > 150 &&
+            mb < Math.min(mr, mg) - 28;
+
+          var vivid1 = 1.78;
+          var gammaV = 0.7;
+          var lightAmt = 0.18;
+          if (blueLean) {
+            vivid1 = 1.88;
+            gammaV = 0.66;
+            lightAmt = 0.04;
+          } else if (redLean) {
+            vivid1 = 1.98;
+            gammaV = 0.94;
+            lightAmt = 0;
+          } else if (yellowLean) {
+            vivid1 = 1.86;
+            gammaV = 0.58;
+            lightAmt = 0.26;
+          }
+
+          var v = easterBoostVivid(mr, mg, mb, vivid1);
+          v = easterLiftGamma(v.r, v.g, v.b, gammaV);
+          if (!redLean) {
+            v = easterHappyLighten(v.r, v.g, v.b, lightAmt);
+          }
+          if (blueLean) {
+            v = easterBoostVivid(v.r, v.g, v.b, 1.62);
+          } else if (redLean) {
+            v = easterBoostVivid(v.r, v.g, v.b, 1.88);
+            v = easterRedSnap(v.r, v.g, v.b);
+            v = easterBoostVivid(v.r, v.g, v.b, 1.42);
+          } else if (yellowLean) {
+            v = easterBoostVivid(v.r, v.g, v.b, 1.48);
+            v = easterHappyLighten(v.r, v.g, v.b, 0.1);
+          } else {
+            v = easterBoostVivid(v.r, v.g, v.b, 1.45);
+            v = easterHappyLighten(v.r, v.g, v.b, 0.06);
+          }
+          return easterRgbToHex(v.r, v.g, v.b);
+        }
+
+        /**
+         * Přesná geometrie vejce z uživatelského SVG (200×260, viewBox 0 0 200 260).
+         * Střed tvaru (100, 130); měřítko r/100 ~ odpovídá poloměru uzlu u kruhu.
+         */
+        function eggPath(cx, cy, r) {
+          var k = r / 100;
+          function tx(x) {
+            return cx + (x - 100) * k;
+          }
+          function ty(y) {
+            return cy + (y - 130) * k;
+          }
+          ctx.beginPath();
+          ctx.moveTo(tx(100), ty(20));
+          ctx.bezierCurveTo(tx(150), ty(20), tx(180), ty(80), tx(180), ty(140));
+          ctx.bezierCurveTo(tx(180), ty(200), tx(140), ty(240), tx(100), ty(240));
+          ctx.bezierCurveTo(tx(60), ty(240), tx(20), ty(200), tx(20), ty(140));
+          ctx.bezierCurveTo(tx(20), ty(80), tx(50), ty(20), tx(100), ty(20));
+          ctx.closePath();
+        }
+
+        function krasliceWaveLine(y0, cx, halfW, amp, waves) {
+          var x0 = cx - halfW;
+          var s;
+          var step = (halfW * 2) / waves;
+          ctx.moveTo(x0, y0);
+          for (s = 1; s <= waves; s++) {
+            var xm = x0 + (s - 0.5) * step;
+            var xe = x0 + s * step;
+            ctx.quadraticCurveTo(xm, y0 + (s % 2 === 0 ? amp : -amp), xe, y0);
+          }
+        }
+
+        function krasliceZigBand(y0, cx, span, amp, steps) {
+          var x0 = cx - span;
+          var s;
+          ctx.moveTo(x0, y0);
+          for (s = 1; s <= steps; s++) {
+            ctx.lineTo(x0 + (s / steps) * span * 2, y0 + (s % 2 === 0 ? amp : -amp));
+          }
+        }
+
+        /** Ornamenty ve stylu referenčního SVG (tečky, vlny, pásy, klikaté linky). */
+        function drawKrasliceDecor(d, rVis) {
+          var cx = d.x;
+          var cy = d.y;
+          var r = rVis != null ? rVis : d.r;
+          var variant = d.id % 6;
+          var light = document.body.getAttribute("data-theme") === "light";
+          var cream = light ? "rgba(90, 40, 120, 0.72)" : "#fff5fb";
+          var pink = light ? "rgba(220, 20, 100, 0.88)" : "#ff1f8f";
+          var teal = light ? "rgba(0, 150, 110, 0.82)" : "#00ffcc";
+          var yellow = light ? "rgba(255, 190, 0, 0.92)" : "#fff200";
+          var orange = light ? "rgba(255, 85, 0, 0.85)" : "#ff7a18";
+          var violet = light ? "rgba(140, 40, 230, 0.82)" : "#d946ff";
+          var lime = light ? "rgba(90, 190, 0, 0.82)" : "#c4ff00";
+          var hot = light ? "rgba(255, 0, 140, 0.78)" : "#ff0099";
+          var lw = Math.max(1, r * 0.072);
+          ctx.lineCap = "round";
+          ctx.lineJoin = "round";
+
+          function dotRow(y, count, rad, fill) {
+            var k;
+            ctx.fillStyle = fill;
+            for (k = 0; k < count; k++) {
+              var fx = cx + (k / (count - 1) - 0.5) * r * 1.55;
+              ctx.beginPath();
+              ctx.arc(fx, y, rad, 0, Math.PI * 2);
+              ctx.fill();
+            }
+          }
+
+          if (variant === 0) {
+            ctx.strokeStyle = teal;
+            ctx.lineWidth = lw * 1.1;
+            ctx.beginPath();
+            krasliceWaveLine(cy - r * 0.28, cx, r * 0.72, r * 0.08, 10);
+            ctx.stroke();
+            ctx.strokeStyle = violet;
+            ctx.lineWidth = lw * 0.9;
+            ctx.beginPath();
+            krasliceWaveLine(cy + r * 0.12, cx, r * 0.78, r * 0.09, 11);
+            ctx.stroke();
+            dotRow(cy + r * 0.12, 5, Math.max(0.95, r * 0.07), yellow);
+            ctx.fillStyle = orange;
+            ctx.beginPath();
+            ctx.arc(cx - r * 0.35, cy - r * 0.45, Math.max(0.65, r * 0.045), 0, Math.PI * 2);
+            ctx.arc(cx + r * 0.4, cy - r * 0.2, Math.max(0.6, r * 0.04), 0, Math.PI * 2);
+            ctx.fill();
+            ctx.strokeStyle = pink;
+            ctx.lineWidth = lw * 0.85;
+            ctx.beginPath();
+            krasliceZigBand(cy + r * 0.42, cx, r * 0.62, r * 0.08, 11);
+            ctx.stroke();
+          } else if (variant === 1) {
+            ctx.strokeStyle = pink;
+            ctx.lineWidth = lw * 0.95;
+            var vi;
+            for (vi = -2; vi <= 2; vi++) {
+              ctx.beginPath();
+              ctx.moveTo(cx + vi * r * 0.26, cy - r * 0.72);
+              ctx.bezierCurveTo(
+                cx + vi * r * 0.34 + r * 0.1,
+                cy - r * 0.28,
+                cx + vi * r * 0.2,
+                cy + r * 0.22,
+                cx + vi * r * 0.3,
+                cy + r * 0.75
+              );
+              ctx.stroke();
+            }
+            ctx.strokeStyle = orange;
+            ctx.lineWidth = lw * 0.55;
+            ctx.beginPath();
+            ctx.moveTo(cx, cy - r * 0.65);
+            ctx.lineTo(cx, cy + r * 0.55);
+            ctx.stroke();
+            dotRow(cy - r * 0.08, 4, Math.max(0.9, r * 0.06), yellow);
+            dotRow(cy + r * 0.38, 3, Math.max(0.85, r * 0.055), lime);
+          } else if (variant === 2) {
+            ctx.strokeStyle = teal;
+            ctx.lineWidth = lw * 0.95;
+            var ri;
+            for (ri = 0; ri < 6; ri++) {
+              var yy = cy - r * 0.58 + ri * r * 0.24;
+              ctx.beginPath();
+              ctx.moveTo(cx - r * 0.78, yy);
+              ctx.quadraticCurveTo(cx, yy + r * 0.18, cx + r * 0.78, yy);
+              ctx.stroke();
+            }
+            dotRow(cy + r * 0.05, 6, Math.max(0.8, r * 0.052), yellow);
+            ctx.fillStyle = violet;
+            ctx.beginPath();
+            ctx.arc(cx, cy - r * 0.35, Math.max(0.65, r * 0.042), 0, Math.PI * 2);
+            ctx.fill();
+          } else if (variant === 3) {
+            ctx.strokeStyle = cream;
+            ctx.lineWidth = lw * 0.78;
+            var hi;
+            for (hi = 0; hi < 7; hi++) {
+              var hy = cy - r * 0.65 + hi * r * 0.22;
+              ctx.beginPath();
+              ctx.moveTo(cx - r * 0.82, hy);
+              ctx.lineTo(cx + r * 0.82, hy);
+              ctx.stroke();
+            }
+            ctx.strokeStyle = pink;
+            ctx.lineWidth = lw * 0.72;
+            ctx.beginPath();
+            ctx.arc(cx, cy + r * 0.18, r * 0.2, 0, Math.PI * 2);
+            ctx.stroke();
+            ctx.strokeStyle = teal;
+            ctx.lineWidth = lw * 0.5;
+            ctx.beginPath();
+            ctx.arc(cx, cy + r * 0.18, r * 0.14, 0, Math.PI * 2);
+            ctx.stroke();
+            dotRow(cy + r * 0.18, 5, Math.max(0.75, r * 0.048), yellow);
+          } else if (variant === 4) {
+            ctx.strokeStyle = pink;
+            ctx.lineWidth = lw * 0.88;
+            var ai;
+            for (ai = 0; ai < 7; ai++) {
+              var ang = (ai / 7) * Math.PI * 2 + d.id * 0.37;
+              var ax = cx + Math.cos(ang) * r * 0.38;
+              var ay = cy + Math.sin(ang) * r * 0.34;
+              ctx.beginPath();
+              ctx.moveTo(ax - r * 0.055, ay);
+              ctx.lineTo(ax + r * 0.055, ay);
+              ctx.moveTo(ax, ay - r * 0.055);
+              ctx.lineTo(ax, ay + r * 0.055);
+              ctx.stroke();
+            }
+            dotRow(cy - r * 0.35, 5, Math.max(0.8, r * 0.055), orange);
+            ctx.fillStyle = yellow;
+            ctx.beginPath();
+            ctx.arc(cx + r * 0.15, cy + r * 0.5, Math.max(0.65, r * 0.04), 0, Math.PI * 2);
+            ctx.fill();
+          } else {
+            ctx.strokeStyle = teal;
+            ctx.lineWidth = lw * 0.72;
+            var wi;
+            for (wi = 0; wi < 5; wi++) {
+              var wy = cy - r * 0.52 + wi * r * 0.26;
+              ctx.beginPath();
+              ctx.moveTo(cx - r * 0.75, wy);
+              ctx.bezierCurveTo(cx - r * 0.22, wy + r * 0.12, cx + r * 0.22, wy - r * 0.12, cx + r * 0.75, wy);
+              ctx.stroke();
+            }
+            ctx.fillStyle = yellow;
+            ctx.beginPath();
+            ctx.arc(cx, cy - r * 0.22, Math.max(0.78, r * 0.05), 0, Math.PI * 2);
+            ctx.arc(cx + r * 0.32, cy + r * 0.18, Math.max(0.72, r * 0.045), 0, Math.PI * 2);
+            ctx.arc(cx - r * 0.32, cy + r * 0.18, Math.max(0.72, r * 0.045), 0, Math.PI * 2);
+            ctx.fill();
+            ctx.fillStyle = hot;
+            ctx.beginPath();
+            ctx.arc(cx + r * 0.08, cy + r * 0.52, Math.max(0.55, r * 0.035), 0, Math.PI * 2);
+            ctx.fill();
+          }
+        }
+
         function drawNode(d) {
-          var stroke = document.body.getAttribute("data-theme") === "light" ? "#111827" : "#0a0a0a";
+          var light = document.body.getAttribute("data-theme") === "light";
+          var stroke = light ? "#111827" : "#0a0a0a";
           ctx.fillStyle = d.color;
           ctx.strokeStyle = stroke;
           ctx.lineWidth = 1;
+          var bgT = effectiveBgGraphTheme();
+          if (bgT === "easter") {
+            var rEgg = easterEggDrawRadius(d);
+            var eggStrokes = light
+              ? ["#6d28d9", "#db2777", "#0891b2", "#ca8a04", "#16a34a"]
+              : ["#f0abfc", "#fde047", "#67e8f9", "#fda4af", "#86efac"];
+            var eggStroke = eggStrokes[d.id % eggStrokes.length];
+            eggPath(d.x, d.y, rEgg);
+            ctx.fillStyle = easterEggFillHex(d);
+            ctx.fill();
+            ctx.save();
+            eggPath(d.x, d.y, rEgg);
+            ctx.clip();
+            drawKrasliceDecor(d, rEgg);
+            ctx.restore();
+            eggPath(d.x, d.y, rEgg);
+            ctx.strokeStyle = eggStroke;
+            ctx.lineWidth = Math.max(1, rEgg * 0.045);
+            ctx.stroke();
+            return;
+          }
+          if (bgT === "valentine") {
+            var rHeart = valentineHeartScale(d);
+            valentineHeartPath(d.x, d.y, rHeart);
+            ctx.fillStyle = VALENTINE_FILL;
+            ctx.fill();
+            valentineHeartPath(d.x, d.y, rHeart);
+            ctx.strokeStyle = light ? VALENTINE_STROKE_LIGHT : VALENTINE_STROKE_DARK;
+            ctx.lineWidth = Math.max(1, rHeart * 0.055);
+            ctx.stroke();
+            return;
+          }
+          if (bgT === "christmas") {
+            var rStar = d.r * (1.02 + ((d.id * 7) % 10) * 0.035);
+            var outR = rStar * 1.08;
+            var inR = rStar * 0.4;
+            christmasStarPath(d.x, d.y, outR, inR);
+            var golds = ["#fde047", "#fbbf24", "#fef08a", "#fcd34d", "#facc15", "#fef9c3"];
+            ctx.fillStyle = golds[d.id % golds.length];
+            ctx.fill();
+            christmasStarPath(d.x, d.y, outR, inR);
+            ctx.strokeStyle = light ? "#b45309" : "#fffbeb";
+            ctx.lineWidth = Math.max(1, rStar * 0.075);
+            ctx.stroke();
+            return;
+          }
           if (d.shape === "square") {
             var s = d.r * 2;
             ctx.fillRect(d.x - d.r, d.y - d.r, s, s);
@@ -973,25 +1543,26 @@
 
         document.body.addEventListener("themechange", function () {
           drawOnce();
+          if (simulation && !reduceMotion && !document.hidden) {
+            simulation.alpha(0.06).restart();
+          }
         });
 
         /* Během scrollu vypnout fyziku — jinak tick + kreslení bere hlavní vlákno a scroll seká. */
         if (!reduceMotion && simulation) {
           var scrollEndTimer = null;
-          var wasRunning = false;
           window.addEventListener(
             "scroll",
             function () {
               if (!simulation) return;
-              if (scrollEndTimer == null) {
-                wasRunning = simulation.alpha() > simulation.alphaMin();
-                simulation.stop();
-              }
+              if (scrollEndTimer == null) simulation.stop();
               clearTimeout(scrollEndTimer);
               scrollEndTimer = setTimeout(function () {
                 scrollEndTimer = null;
                 drawOnce();
-                if (wasRunning) simulation.alpha(0.12).restart();
+                if (simulation && !reduceMotion && !document.hidden) {
+                  simulation.alpha(0.14).restart();
+                }
               }, 140);
             },
             { passive: true }
@@ -1003,6 +1574,21 @@
           if (document.hidden) simulation.stop();
           else simulation.alpha(0.1).restart();
         });
+
+        document.addEventListener("i18napply", function () {
+          syncBgGraphModeButtons();
+        });
+
+        (function wireBgGraphModeBar() {
+          var root = document.getElementById("bgGraphMode");
+          if (!root) return;
+          root.querySelectorAll("[data-bg-graph-mode]").forEach(function (btn) {
+            btn.addEventListener("click", function () {
+              setBgGraphModeOverride(btn.getAttribute("data-bg-graph-mode") || "auto");
+            });
+          });
+          syncBgGraphModeButtons();
+        })();
       })();
     </script>
   </body>

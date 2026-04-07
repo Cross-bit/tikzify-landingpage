@@ -24,6 +24,14 @@
       },
       brand: { aria: "tikzgraph", title: "tikzgraph", subtitle: "vizuální grafy · TikZ do LaTeXu" },
       nav: { mainAria: "Hlavní navigace", features: "Funkce", how: "Jak to funguje", download: "Stažení", story: "Pozadí" },
+      bgGraphMode: {
+        aria: "Vzhled uzlů na pozadí",
+        auto: "Auto",
+        normal: "Normál",
+        easter: "Vejce",
+        valentine: "Srdce",
+        xmas: "Vánoce",
+      },
       hero: {
         kicker: "LaTeX workflow · TikZ export",
         h1: "Navrhni grafy. Vygeneruj čisté TikZ.",
@@ -109,6 +117,14 @@
       },
       brand: { aria: "tikzgraph", title: "tikzgraph", subtitle: "Visual graphs · TikZ for LaTeX" },
       nav: { mainAria: "Main navigation", features: "Features", how: "How it works", download: "Download", story: "Background" },
+      bgGraphMode: {
+        aria: "Background graph node style",
+        auto: "Auto",
+        normal: "Plain",
+        easter: "Easter",
+        valentine: "Hearts",
+        xmas: "Xmas",
+      },
       hero: {
         kicker: "LaTeX workflow · TikZ export",
         h1: "Design graphs. Generate clean TikZ.",
@@ -285,6 +301,9 @@
     applyDom();
     syncLangButtons();
     syncThemeToggle();
+    try {
+      document.dispatchEvent(new CustomEvent("i18napply"));
+    } catch (e) {}
   }
 
   function wireLangButtons() {

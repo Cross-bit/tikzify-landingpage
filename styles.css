@@ -31,7 +31,8 @@
   --graph-edge-whisper: rgba(233, 224, 99, 0.233);
   --graph-line-main: 2.25;
   --graph-line-whisper: 1.6;
-  --graph-opacity: 0.58;
+  /* 1 = plná sytost grafu; nižší hodnota míchá celý canvas s --bg → „mléčný“ overlay */
+  --graph-opacity: 1;
 
   /* Průhledné panely — ať je canvas graf vidět „přes celou“ stránku */
   --panel: rgba(15, 23, 42, 0.72);
@@ -67,7 +68,7 @@
   --panel: rgba(255, 255, 255, 0.82);
   --panel-2: rgba(255, 255, 255, 0.7);
   --header-bg: rgba(244, 245, 247, 0.86);
-  --graph-opacity: 0.52;
+  --graph-opacity: 1;
 }
 
 * {
@@ -325,6 +326,54 @@ a {
 }
 
 .lang-btn:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: -2px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Přepínač stylu uzlů pozadí — v DOM zůstává (localStorage), vizuálně skrytý. Zobrazit: smaž tento blok nebo nastav display: inline-flex. */
+.bg-graph-mode {
+  display: none;
+  align-items: stretch;
+  flex-wrap: wrap;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: var(--surface-2);
+  max-width: min(100%, 320px);
+}
+
+.bg-graph-mode__btn {
+  margin: 0;
+  padding: 5px 7px;
+  border: 0;
+  border-right: 1px solid var(--border);
+  background: transparent;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.bg-graph-mode__btn:last-child {
+  border-right: 0;
+}
+
+.bg-graph-mode__btn:hover {
+  color: var(--text);
+  background: var(--panel);
+}
+
+.bg-graph-mode__btn.is-active {
+  color: var(--text);
+  background: var(--panel);
+}
+
+.bg-graph-mode__btn:focus-visible {
   outline: 2px solid var(--focus);
   outline-offset: -2px;
   position: relative;
