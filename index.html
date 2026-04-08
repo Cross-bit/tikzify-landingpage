@@ -244,14 +244,26 @@
                   hidden
                 >
                   <div class="tikz-code">
-                    <pre><code>\begin{tikzpicture}[every node/.style={circle,draw,minimum size=8mm}]
-  \node (A) at (0,0) {A};
-  \node (B) at (2,1) {B};
-  \node (C) at (4,0) {C};
-
-  \draw[->] (A) -- (B);
-  \draw[->] (B) -- (C);
-  \draw[->] (A) -- (C);
+                    <pre><code>% TikzGraph export — preamble: use "LaTeX preamble" in the app panel (directed tips with &gt;={...} need \usetikzlibrary{arrows.meta}).
+\begin{tikzpicture}
+  \tikzset{
+    nstyle1/.style={ circle, draw={rgb,255:red,0;green,0;blue,0}, fill={rgb,255:red,74;green,144;blue,226}, text={rgb,255:red,0;green,0;blue,0}, line width=0.8pt, minimum size=1cm, inner sep=0pt, font=\fontfamily{phv}\selectfont\fontsize{13}{15.6}\selectfont },
+    estyle1/.style={ draw={rgb,255:red,0;green,0;blue,0}, line width=0.9pt },
+    elabelstyle1/.style={ fill=white, inner sep=1pt, text={rgb,255:red,0;green,0;blue,0}, font=\fontfamily{phv}\selectfont\fontsize{13}{15.6}\selectfont }
+  }
+  \node[nstyle1] (n1) at (-3.838,2.138) {1};
+  \node[nstyle1] (n2) at (3.838,1.413) {50};
+  \node[nstyle1] (n3) at (-1.863,-1.438) {800};
+  \node[nstyle1] (n4) at (1.013,-2.713) {12};
+  \node[nstyle1] (n5) at (0.438,2.713) {42};
+  \draw[estyle1,-{Stealth[line width=0.9pt, length=0.3cm, width'=0.15cm, inset'=0.098cm]}] (n1) -- node[midway, elabelstyle1] {a} (n5);
+  \draw[estyle1,-{Stealth[line width=0.9pt, length=0.3cm, width'=0.15cm, inset'=0.098cm]}] (n1) to[out=120,in=60,looseness=10.53] node[midway, elabelstyle1] {c} (n1);
+  \draw[estyle1,-{Stealth[line width=0.9pt, length=0.3cm, width'=0.15cm, inset'=0.098cm]}] (n1) -- node[midway, elabelstyle1] {b} (n3);
+  \draw[estyle1,-{Stealth[line width=0.9pt, length=0.3cm, width'=0.15cm, inset'=0.098cm]}] (n2) -- (n5);
+  \draw[estyle1,-{Stealth[line width=0.9pt, length=0.3cm, width'=0.15cm, inset'=0.098cm]}] (n2) to[out=48.43,in=-11.57,looseness=10.53] node[midway, elabelstyle1] {b} (n2);
+  \draw[estyle1,-{Stealth[line width=0.9pt, length=0.3cm, width'=0.15cm, inset'=0.098cm]}] (n3) -- node[midway, elabelstyle1] {b} (n4);
+  \draw[estyle1,-{Stealth[line width=0.9pt, length=0.3cm, width'=0.15cm, inset'=0.098cm]}] (n3) -- node[midway, elabelstyle1] {b} (n5);
+  \draw[estyle1,-{Stealth[line width=0.9pt, length=0.3cm, width'=0.15cm, inset'=0.098cm]}] (n4) -- node[midway, elabelstyle1] {b} (n2);
 \end{tikzpicture}</code></pre>
                   </div>
                 </div>
