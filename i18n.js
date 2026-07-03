@@ -9,11 +9,11 @@
   var STRINGS = {
     cs: {
       meta: {
-        title: "tikzgraph — vizuální grafy do LaTeXu (TikZ) | open source",
+        title: "tikzgraph — visual graph editor with TikZ export | open source",
         description:
-          "tikzgraph: editor grafů s exportem do TikZ pro LaTeX — uzly, hrany, výběr, mřížka, vodítka, zpět/vpřed. Open source — Windows, Linux, iOS.",
-        ogTitle: "tikzgraph — vizuální grafy do LaTeXu (TikZ)",
-        ogDescription: "Kresli grafy v tikzgraph, exportuj TikZ do dokumentu. Open source, multiplatformní.",
+          "tikzgraph: draw graph structures visually, tune layout, edit labels, and export clean TikZ for LaTeX. Selection, undo/redo, identity loops, and cross-platform desktop builds.",
+        ogTitle: "tikzgraph — visual graph editor with TikZ export",
+        ogDescription: "Create graph diagrams visually and export clean TikZ code for LaTeX. Open source desktop app.",
       },
       theme: { toDay: "Den", toNight: "Noc", ariaToggle: "Přepnout světlý a tmavý režim" },
       langSwitch: { aria: "Jazyk stránky" },
@@ -65,7 +65,7 @@
           "Vybíráš víc věcí najednou, přesouváš je společně a když se netrefíš, vrátíš krok zpět nebo znovu vpřed.",
         f4t: "Kdekoliv pracuješ",
         f4p:
-          "Stejná aplikace na iOS, Windows a Linuxu. Mřížka a vodítka ti pomůžou slícovat layout, když chceš pořádek.",
+          "Stejná aplikace na macOS, Windows a Linuxu. Mřížka a vodítka ti pomůžou slícovat layout, když chceš pořádek.",
       },
       how: {
         title: "Jak to funguje",
@@ -102,11 +102,11 @@
     },
     en: {
       meta: {
-        title: "tikzgraph — visual graphs to LaTeX (TikZ) | open source",
+        title: "tikzgraph — visual graph editor with TikZ export | open source",
         description:
-          "tikzgraph: draw graphs visually—selection, grid, guides, undo/redo—export clean TikZ for LaTeX. Open source: Windows, Linux, iOS.",
-        ogTitle: "tikzgraph — visual graphs to LaTeX (TikZ)",
-        ogDescription: "Draw graphs in tikzgraph, export TikZ for LaTeX. Open source, cross-platform.",
+          "tikzgraph: draw graph structures visually, tune layout, edit labels, and export clean TikZ for LaTeX. Selection, undo/redo, identity loops, and cross-platform desktop builds.",
+        ogTitle: "tikzgraph — visual graph editor with TikZ export",
+        ogDescription: "Create graph diagrams visually and export clean TikZ code for LaTeX. Open source desktop app.",
       },
       theme: { toDay: "Day", toNight: "Night", ariaToggle: "Toggle light and dark theme" },
       langSwitch: { aria: "Page language" },
@@ -127,9 +127,9 @@
       },
       hero: {
         kicker: "LaTeX workflow · TikZ export",
-        h1: "Design graphs. Generate clean TikZ.",
+        h1: "Design graph diagrams. Export clean TikZ.",
         lead:
-          "Draw on the canvas, tidy the layout, and export to TikZ for LaTeX—no retyping code by hand.",
+          "Build nodes and edges on canvas, tune labels and geometry, then export code-ready TikZ for LaTeX — no manual rewriting.",
         download: "Download",
         currentReleaseLabel: "Current release",
         platformsAria: "Supported platforms",
@@ -148,28 +148,28 @@
       features: {
         title: "Features",
         subtitle: "Sketch on the canvas, refine the layout, drop it into LaTeX as TikZ.",
-        f1t: "Comfortable drawing",
+        f1t: "Canvas-first graph editing",
         f1p:
-          "Build the graph right on the canvas—nodes, edges, labels. Pan and zoom the way you expect from a desktop editor.",
-        f2t: "TikZ export",
-        f2p: "One step to code you can paste into your document—no manual transcription.",
-        f3t: "Room to fix mistakes",
+          "Add nodes and directed/undirected edges directly on canvas. Create identity loops, drag labels, and keep layout readable while you work.",
+        f2t: "TikZ export for LaTeX",
+        f2p: "Export graph drawings as clean TikZ code and paste into your document. Great for lecture notes, reports, and formal diagrams.",
+        f3t: "Selection + undo/redo workflow",
         f3p:
-          "Select several things at once, move them together, and step backward or forward when something isn’t quite right.",
-        f4t: "Works where you work",
+          "Select single or multiple objects, move/refine quickly, and recover safely with undo/redo when iterating on structure or styling.",
+        f4t: "Desktop, open source",
         f4p:
-          "The same app on iOS, Windows, and Linux. Turn on the grid or guides when you want a neat, aligned figure.",
+          "Open-source app with practical desktop workflow and reproducible exports. Built for day-to-day graph editing, not one-off screenshots.",
       },
       how: {
         title: "How it works",
         subtitle: "Draw → align the layout → export TikZ.",
-        s1t: "Create a graph",
-        s1p: "Add nodes and connect them with edges—directed or not, depending on what you’re modeling.",
-        s2t: "Tune the layout",
+        s1t: "Sketch the structure",
+        s1p: "Place nodes, connect edges, and define directionality or loops according to your model.",
+        s2t: "Refine layout and labels",
         s2p:
-          "Select what you need and drag it into place. Switch on the grid or guides when you want everything lined up.",
-        s3t: "Export to TikZ",
-        s3p: "Copy the TikZ output and paste it into your LaTeX document.",
+          "Align and reposition graph parts, tune labels and styling, and use selection tools to polish the final diagram.",
+        s3t: "Export and use in LaTeX",
+        s3p: "Copy generated TikZ output and insert it directly into your LaTeX workflow.",
       },
       download: {
         title: "Download",

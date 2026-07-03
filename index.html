@@ -9,26 +9,26 @@
     <meta name="robots" content="index, follow" />
     <meta name="theme-color" content="#0b1220" />
 
-    <title>tikzgraph — visual graphs to LaTeX (TikZ) | open source</title>
+    <title>tikzgraph — visual graph editor with TikZ export | open source</title>
     <meta
       name="description"
-      content="tikzgraph: draw graphs visually, export clean TikZ code for LaTeX. Nodes, edges, layout—no hand-coding. Open source: Windows, Linux, iOS."
+      content="tikzgraph: draw graph structures visually, tune layout, edit labels, and export clean TikZ for LaTeX. Selection, undo/redo, identity loops, and cross-platform desktop builds."
     />
 
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://example.com/" />
     <meta property="og:locale" content="en_US" />
-    <meta property="og:title" content="tikzgraph — visual graphs to LaTeX (TikZ)" />
+    <meta property="og:title" content="tikzgraph — visual graph editor with TikZ export" />
     <meta
       property="og:description"
-      content="Draw graphs in a visual editor, export TikZ for LaTeX. Open source, cross-platform."
+      content="Create graph diagrams visually and export clean TikZ code for LaTeX. Open source desktop app."
     />
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="tikzgraph — visual graphs to LaTeX (TikZ)" />
+    <meta name="twitter:title" content="tikzgraph — visual graph editor with TikZ export" />
     <meta
       name="twitter:description"
-      content="Draw graphs in a visual editor, export TikZ for LaTeX. Open source, cross-platform."
+      content="Create graph diagrams visually and export clean TikZ code for LaTeX. Open source desktop app."
     />
 
     <script type="application/ld+json">
@@ -48,7 +48,7 @@
             "@id": "https://example.com/#app",
             "name": "tikzgraph",
             "applicationCategory": "DeveloperApplication",
-            "operatingSystem": "Windows, Linux, iOS",
+            "operatingSystem": "macOS, Windows, Linux",
             "offers": {
               "@type": "Offer",
               "price": "0",
@@ -140,7 +140,7 @@
         </p>
         <p class="wip-banner__contact">
           <span data-i18n="notice.contactLead">Pokud máte zájem o vývoj nebo máte nápady na zlepšení, napište mi na</span>
-          <a href="mailto:ondra.kryz@seznam.cz">ondra.kryz@seznam.cz</a>.
+          <a href="mailto:andrew@tikzgraph.com">andrew@tikzgraph.com</a>.
         </p>
       </div>
     </section>
@@ -150,10 +150,10 @@
         <div class="container hero-grid">
           <div>
             <div class="kicker" data-i18n="hero.kicker">LaTeX workflow · TikZ export</div>
-            <h1 data-i18n="hero.h1">Navrhni grafy. Vygeneruj čisté TikZ.</h1>
+            <h1 data-i18n="hero.h1">Design graph diagrams. Export clean TikZ.</h1>
             <p class="lead" data-i18n="hero.lead">
-              Nakresli graf na plátně, srovnej ho do latě a exportuj do TikZ pro LaTeX — bez ručního přepisování
-              kódu.
+              Build nodes and edges on canvas, tune labels and geometry, then export code-ready TikZ for LaTeX
+              — no manual rewriting.
             </p>
 
             <div class="cta-row">
@@ -171,7 +171,7 @@
             </div>
 
             <div class="meta-row" data-i18n-aria="hero.platformsAria">
-              <span class="badge">iOS</span>
+              <span class="badge">macOS</span>
               <span class="badge">Windows</span>
               <span class="badge">Linux</span>
               <span class="badge" data-i18n="hero.badgefoss">Open source</span>
@@ -282,28 +282,31 @@
 
           <div class="feature-grid">
             <article class="feature">
-              <h3 data-i18n="features.f1t">Příjemné kreslení</h3>
+              <h3 data-i18n="features.f1t">Canvas-first graph editing</h3>
               <p data-i18n="features.f1p">
-                Stavíš graf přímo na plátně — uzly, hrany, popisky. Posouváš plátno a přibližuješ, jak jsi
-                zvyklý z desktopové grafiky.
+                Add nodes and directed/undirected edges directly on canvas. Create identity loops, drag labels,
+                and keep layout readable while you work.
               </p>
             </article>
             <article class="feature">
-              <h3 data-i18n="features.f2t">TikZ export</h3>
-              <p data-i18n="features.f2p">Za chvíli máš kód připravený do dokumentu — bez ručního přepisování.</p>
+              <h3 data-i18n="features.f2t">TikZ export for LaTeX</h3>
+              <p data-i18n="features.f2p">
+                Export graph drawings as clean TikZ code and paste into your document. Great for lecture notes,
+                reports, and formal diagrams.
+              </p>
             </article>
             <article class="feature">
-              <h3 data-i18n="features.f3t">Kontrola nad úpravami</h3>
+              <h3 data-i18n="features.f3t">Selection + undo/redo workflow</h3>
               <p data-i18n="features.f3p">
-                Vybíráš víc věcí najednou, přesouváš je společně a když se netrefíš, vrátíš krok zpět nebo
-                znovu vpřed.
+                Select single or multiple objects, move/refine quickly, and recover safely with undo/redo when
+                iterating on structure or styling.
               </p>
             </article>
             <article class="feature">
-              <h3 data-i18n="features.f4t">Kdekoliv pracuješ</h3>
+              <h3 data-i18n="features.f4t">Desktop, open source</h3>
               <p data-i18n="features.f4p">
-                Stejná aplikace na iOS, Windows a Linuxu. Mřížka a vodítka ti pomůžou slícovat layout, když
-                chceš pořádek.
+                Open-source app with practical desktop workflow and reproducible exports. Built for day-to-day
+                graph editing, not one-off screenshots.
               </p>
             </article>
           </div>
@@ -321,26 +324,28 @@
             <div class="step">
               <div class="step-top">
                 <div class="step-num">1</div>
-                <h3 data-i18n="how.s1t">Vytvoř graf</h3>
+                <h3 data-i18n="how.s1t">Sketch the structure</h3>
               </div>
-              <p data-i18n="how.s1p">Přidej uzly, spoj je hranami — orientované nebo ne, podle toho, co zrovna řešíš.</p>
+              <p data-i18n="how.s1p">
+                Place nodes, connect edges, and define directionality or loops according to your model.
+              </p>
             </div>
             <div class="step">
               <div class="step-top">
                 <div class="step-num">2</div>
-                <h3 data-i18n="how.s2t">Uprav layout</h3>
+                <h3 data-i18n="how.s2t">Refine layout and labels</h3>
               </div>
               <p data-i18n="how.s2p">
-                Vyber, co potřebuješ, přesuň to na plátně. Zapni mřížku nebo vodítka, až chceš hezky zarovnaný
-                obrázek.
+                Align and reposition graph parts, tune labels and styling, and use selection tools to polish the
+                final diagram.
               </p>
             </div>
             <div class="step">
               <div class="step-top">
                 <div class="step-num">3</div>
-                <h3 data-i18n="how.s3t">Exportuj do TikZ</h3>
+                <h3 data-i18n="how.s3t">Export and use in LaTeX</h3>
               </div>
-              <p data-i18n="how.s3p">Zkopíruj TikZ výstup a vlož ho do svého LaTeX dokumentu.</p>
+              <p data-i18n="how.s3p">Copy generated TikZ output and insert it directly into your LaTeX workflow.</p>
             </div>
           </div>
         </div>
